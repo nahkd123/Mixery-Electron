@@ -2,3 +2,4 @@ node_modules
 tsbuildinfo.json
 pull.ps1
 bin
+dist
