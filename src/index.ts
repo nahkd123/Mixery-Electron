@@ -14,7 +14,7 @@ function init() {
     mainWindow.once("ready-to-show", () => {
         mainWindow.removeMenu();
         mainWindow.show();
-        mainWindow.webContents.openDevTools({mode: "bottom"});
+        // mainWindow.webContents.openDevTools({mode: "bottom"});
 
         // This will be used to display close buttons as well as additional options
         mainWindow.webContents.executeJavaScript("toggleElectronJS()", false);
