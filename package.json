@@ -5,7 +5,7 @@
   "main": "bin/index.js",
   "scripts": {
     "test": "tsc -b && cd Mixery && tsc -b && cd .. && electron .",
-    "build": "tsc -b && cd Mixery && tsc -b && cd ..",
+    "build": "tsc -b && cd Mixery && tsc -b && cd .. && node bin/build",
     "run": "electron ."
   },
   "keywords": [
@@ -17,6 +17,7 @@
     "electron": "^10.1.2"
   },
   "dependencies": {
-    "@types/node": "^14.11.1"
+    "@types/node": "^14.11.1",
+    "asar": "^3.0.3"
   }
 }

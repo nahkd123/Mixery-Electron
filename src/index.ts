@@ -1,4 +1,5 @@
 import * as Electron from "electron";
+import { join } from "path";
 
 let app = Electron.app;
 let mainWindow: Electron.BrowserWindow;
@@ -8,16 +9,26 @@ function init() {
         show: false,
         minWidth: 1200,
         minHeight: 300,
+        webPreferences: {
+            preload: join(__dirname, "preload.js"),
+            contextIsolation: true
+        }
     });
-    mainWindow.loadFile("Mixery/html/index.html");
+    mainWindow.loadFile("Mixery/app/index.html");
+    mainWindow.removeMenu();
 
     mainWindow.once("ready-to-show", () => {
-        mainWindow.removeMenu();
         mainWindow.show();
         // mainWindow.webContents.openDevTools({mode: "bottom"});
-
-        // This will be used to display close buttons as well as additional options
-        mainWindow.webContents.executeJavaScript("toggleElectronJS()", false);
+    });
+    
+    Electron.ipcMain.on("windowControl", (event, control: string) => {
+        switch (control) {
+            case "maximize": mainWindow.maximize(); break;
+            case "minimize": mainWindow.minimize(); break;
+            case "restore": mainWindow.restore(); break;
+            default: break;
+        }
     });
 }
 
